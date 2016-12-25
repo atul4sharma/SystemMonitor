@@ -1,19 +1,19 @@
 #include "systemutil.h"
 #include <QDebug>
 
-SystemUtil::SystemUtil(QObject *parent)
-    : QObject(parent)
+SystemUtil::SystemUtil( QObject *parent )
+    : QObject( parent )
 {
-    topProcess  =  new QProcess(parent);
+    topProcess  =  new QProcess( parent );
     env         =  QProcess::systemEnvironment();
 
     env << "TERM=vt100";
     process = "top";
     arguments << "-b" << "-n" << "1" ;
 
-    topProcess->setEnvironment( env );
-    topProcess->setProcessChannelMode( QProcess::ForwardedChannels );
-    topProcess->start( process , arguments);
+    topProcess -> setEnvironment( env );
+    topProcess -> setProcessChannelMode( QProcess::ForwardedChannels );
+    topProcess -> start( process , arguments );
 
     connect( topProcess , SIGNAL(started()) , this , SLOT(startFunction()));
     connect( topProcess , SIGNAL(finished(int)) , this , SLOT(endFunction(int)));
