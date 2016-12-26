@@ -8,11 +8,11 @@ typedef unsigned int UINT;
 
 class Process
 {
-    UINT mProcessId;
+    UINT    mProcessId;
     QString mProcessName;
-    float mCpuUsage;
-    double mMemoryUsage;
-    double mSharedMemoryUsage;
+    float   mCpuUsage;
+    double  mMemoryUsage;
+    double  mSharedMemoryUsage;
 
 public:
     Process(UINT ProcessId,
@@ -22,11 +22,11 @@ public:
             double SharedMemoryUsage);
     void showInfo();
 
-    UINT getProcessId();
+    UINT    getProcessId();
     QString getProcessName();
-    float getCpuUsage();
-    double getMemoryUsage();
-    double getSharedMemoryUsage();
+    float   getCpuUsage();
+    double  getMemoryUsage();
+    double  getSharedMemoryUsage();
 };
 
 #endif // PROCESS_H
