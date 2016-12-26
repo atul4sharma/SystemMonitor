@@ -4,33 +4,29 @@
 SystemUtil::SystemUtil( QObject *parent )
     : QObject( parent )
 {
-    topProcess  =  new QProcess( parent );
-    env         =  QProcess::systemEnvironment();
+    mTopProcess  =  new QProcess( parent );
+    mEnv         =  QProcess::systemEnvironment();
 
-    env << "TERM=vt100";
-    process = "top";
-    arguments << "-b" << "-n" << "1" ;
+    mEnv << "TERM=vt100" << "COLUMNS=512";
+    mProcess = "top";
+    mArguments << "-b" << "-n" << "1" ;
 
-    topProcess -> setEnvironment( env );
-    topProcess -> setProcessChannelMode( QProcess::ForwardedChannels );
-    topProcess -> start( process , arguments );
+    mTopProcess -> setEnvironment( mEnv );
+    mTopProcess -> start( mProcess , mArguments );
 
-    connect( topProcess , SIGNAL(started()) , this , SLOT(startFunction()));
-    connect( topProcess , SIGNAL(finished(int)) , this , SLOT(endFunction(int)));
-}
 
-void SystemUtil::startFunction()
-{
-    qDebug() << "-------------------------------" ;
-    qDebug() << "--------PROCESS STARTED--------" ;
-    qDebug() << "-------------------------------" ;
+    if( !mTopProcess->waitForStarted() )
+        qDebug() << "ERROR : " << mTopProcess->error();
 
-}
 
-void SystemUtil::endFunction(int val)
-{
-    qDebug() << "-------------------------------" ;
-    qDebug() << "PROCESS EXITED WITH CODE . "<<val ;
-    qDebug() << "-------------------------------" ;
+    mTopProcess->waitForFinished() ;
+
+    mOutputString = QString( mTopProcess -> readAll() );
+
+    mOutputList = mOutputString.split('\n' , QString::SkipEmptyParts );
+
+    for(int i = 0 ; i < mOutputList.size() ; i++)
+        qDebug() << mOutputList.at(i);
+
 
 }
