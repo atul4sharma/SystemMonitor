@@ -1,9 +1,11 @@
 #ifndef SYSTEMUTIL_H
 #define SYSTEMUTIL_H
 
+#include "process.h"
+
 #include <QObject>
 #include <QProcess>
-
+#include <QList>
 
 class SystemUtil : public QObject
 {
@@ -17,8 +19,12 @@ class SystemUtil : public QObject
     QString      mOutputString;
     QStringList  mOutputList;
 
+    QList<Process> *mProcessList;
+
 public:
     explicit SystemUtil(QObject *parent = 0);
+    ~SystemUtil();
+    QList<Process>* parseProcesses();
 
 signals:
 
