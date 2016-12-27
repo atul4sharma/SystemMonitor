@@ -1,27 +1,32 @@
 #include "process.h"
 
+Process::Process()
+{
+
+}
+
 Process::Process(UINT ProcessId,
                  QString ProcessName,
                  float CpuUsage,
                  double MemoryUsage,
-                 double SharedMemoryUsage)
+                 QString User)
 {
-    mProcessId         = ProcessId ;
-    mProcessName       = ProcessName ;
-    mCpuUsage          = CpuUsage ;
-    mMemoryUsage       = MemoryUsage ;
-    mSharedMemoryUsage = SharedMemoryUsage ;
+    mProcessId   = ProcessId ;
+    mProcessName = ProcessName ;
+    mCpuUsage    = CpuUsage ;
+    mMemoryUsage = MemoryUsage ;
+    mUser        = User ;
 
 }
 
 
-void Process::showInfo(){
+void Process::showInfo() const{
     qDebug() << "----------------[ PROCESS ]----------------" ;
-    qDebug() << "Process No  . . . . . : " << getProcessId () ;
-    qDebug() << "Process Name . . . . .: " << getProcessName () ;
-    qDebug() << "Process CPU Usage  . .: " << getCpuUsage () ;
-    qDebug() << "Process Memory Usage .: " << getMemoryUsage () ;
-    qDebug() << "Process Shared Usage .: " << getSharedMemoryUsage () ;
+    qDebug() << "Process No  . . . . . : " << mProcessId ;
+    qDebug() << "User . . . . . . . . .: " << mUser ;
+    qDebug() << "Process Name . . . . .: " << mProcessName ;
+    qDebug() << "Process CPU Usage  . .: " << mCpuUsage << " % ";
+    qDebug() << "Process Memory Usage .: " << mMemoryUsage << " KiB ";
     qDebug() << "-------------------------------------------" ;
 }
 
@@ -41,6 +46,34 @@ double Process::getMemoryUsage(){
     return this->mMemoryUsage;
 }
 
-double Process::getSharedMemoryUsage(){
-    return this->mSharedMemoryUsage;
+QString Process::getUser(){
+    return this->mUser;
 }
+
+void Process::setProcessId( UINT val )
+{
+    this->mProcessId = val ;
+}
+
+void Process::setProcessName( QString str )
+{
+    this->mProcessName = str ;
+}
+
+void Process::setCpuUsage( float val )
+{
+    this->mCpuUsage = val ;
+}
+
+void Process::setMemoryUsage( double val)
+{
+    this->mMemoryUsage = val ;
+}
+
+void Process::setUser( QString str )
+{
+    this->mUser = str ;
+}
+
+
+

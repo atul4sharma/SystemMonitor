@@ -12,21 +12,29 @@ class Process
     QString mProcessName;
     float   mCpuUsage;
     double  mMemoryUsage;
-    double  mSharedMemoryUsage;
+    QString mUser;
 
 public:
-    Process(UINT ProcessId,
-            QString ProcessName,
-            float CpuUsage,
-            double MemoryUsage,
-            double SharedMemoryUsage);
-    void showInfo();
+    explicit Process();
+    explicit Process(UINT ProcessId,
+                     QString ProcessName,
+                     float CpuUsage,
+                     double MemoryUsage,
+                     QString User);
+    void showInfo() const;
 
     UINT    getProcessId();
     QString getProcessName();
     float   getCpuUsage();
     double  getMemoryUsage();
-    double  getSharedMemoryUsage();
+    QString getUser();
+
+    void setProcessId(UINT val);
+    void setProcessName( QString str);
+    void setCpuUsage( float val);
+    void setMemoryUsage( double val );
+    void setUser(QString str );
+
 };
 
 #endif // PROCESS_H
