@@ -6,6 +6,10 @@ typedef unsigned int UINT;
 #include <QString>
 #include <QDebug>
 
+/**
+ * @brief The Process class
+ * This class acts as data sturcture to store the individual process details
+ */
 class Process
 {
     UINT    mProcessId;
@@ -16,6 +20,7 @@ class Process
 
 public:
     explicit Process();
+
     explicit Process(UINT ProcessId,
                      QString ProcessName,
                      float CpuUsage,
@@ -23,11 +28,11 @@ public:
                      QString User);
     void showInfo() const;
 
-    UINT    getProcessId();
-    QString getProcessName();
-    float   getCpuUsage();
-    double  getMemoryUsage();
-    QString getUser();
+    UINT    getProcessId() const;
+    QString getProcessName() const;
+    float   getCpuUsage() const;
+    double  getMemoryUsage() const;
+    QString getUser() const;
 
     void setProcessId(UINT val);
     void setProcessName( QString str);

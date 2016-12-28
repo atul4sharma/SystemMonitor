@@ -1,16 +1,21 @@
 #include "process.h"
 
-Process::Process()
-{
-
+/**
+ * @brief Process::Process
+ * Data structure to store the required process information
+ */
+Process::Process(){
 }
+/**
+ * @brief Process::Process
+ * @param ProcessId        PID of process
+ * @param ProcessName      Name of process
+ * @param CpuUsage         CPU usage by process
+ * @param MemoryUsage      Memory usage by process
+ * @param User             User that has invoked the process
+ */
+Process::Process(UINT ProcessId, QString ProcessName, float CpuUsage, double MemoryUsage, QString User){
 
-Process::Process(UINT ProcessId,
-                 QString ProcessName,
-                 float CpuUsage,
-                 double MemoryUsage,
-                 QString User)
-{
     mProcessId   = ProcessId ;
     mProcessName = ProcessName ;
     mCpuUsage    = CpuUsage ;
@@ -19,8 +24,12 @@ Process::Process(UINT ProcessId,
 
 }
 
-
+/**
+ * @brief Process::showInfo
+ * Shows the process details
+ */
 void Process::showInfo() const{
+
     qDebug() << "----------------[ PROCESS ]----------------" ;
     qDebug() << "Process No  . . . . . : " << mProcessId ;
     qDebug() << "User . . . . . . . . .: " << mUser ;
@@ -28,52 +37,98 @@ void Process::showInfo() const{
     qDebug() << "Process CPU Usage  . .: " << mCpuUsage << " % ";
     qDebug() << "Process Memory Usage .: " << mMemoryUsage << " KiB ";
     qDebug() << "-------------------------------------------" ;
+
 }
 
-UINT Process::getProcessId(){
+/** ------------------------------ Getter functions ------------------------- **/
+
+/**
+ * @brief Process::getProcessId
+ * @return mProcessId
+ */
+UINT Process::getProcessId() const{
     return this->mProcessId;
 }
 
-QString Process::getProcessName(){
+/**
+ * @brief Process::getProcessName
+ * @return mProcessName
+ */
+QString Process::getProcessName() const{
     return this->mProcessName;
 }
 
-float Process::getCpuUsage(){
+/**
+ * @brief Process::getCpuUsage
+ * @return mCpuUsage
+ */
+float Process::getCpuUsage() const{
     return this->mCpuUsage;
 }
 
-double Process::getMemoryUsage(){
+/**
+ * @brief Process::getMemoryUsage
+ * @return mMemoryUsage
+ */
+double Process::getMemoryUsage() const{
     return this->mMemoryUsage;
 }
 
-QString Process::getUser(){
+/**
+ * @brief Process::getUser
+ * @return mUser
+ */
+QString Process::getUser() const{
     return this->mUser;
 }
 
-void Process::setProcessId( UINT val )
-{
+/** ------------------------------------------------------------------------------- **/
+
+/** ----------------------------- Setter Functions -------------------------------- **/
+
+/**
+ * @brief Process::setProcessId
+ * @param val
+ * sets mProcessId to val
+ */
+void Process::setProcessId( UINT val ){
     this->mProcessId = val ;
 }
 
-void Process::setProcessName( QString str )
-{
+/**
+ * @brief Process::setProcessName
+ * @param str
+ * sets mProcessName to val
+ */
+void Process::setProcessName( QString str ){
     this->mProcessName = str ;
 }
 
-void Process::setCpuUsage( float val )
-{
+/**
+ * @brief Process::setCpuUsage
+ * @param val
+ * sets mCpuUsage to val
+ */
+void Process::setCpuUsage( float val ){
     this->mCpuUsage = val ;
 }
 
-void Process::setMemoryUsage( double val)
-{
+/**
+ * @brief Process::setMemoryUsage
+ * @param val
+ * sets mMemoryUsage to val
+ */
+void Process::setMemoryUsage( double val){
     this->mMemoryUsage = val ;
 }
 
-void Process::setUser( QString str )
-{
+/**
+ * @brief Process::setUser
+ * @param str
+ * sets mUser to str
+ */
+void Process::setUser( QString str ){
     this->mUser = str ;
 }
 
-
-
+/** ------------------------------------------------------------------------------- **/

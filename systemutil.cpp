@@ -1,9 +1,14 @@
 #include "systemutil.h"
 #include <QDebug>
 
+/**
+ * @brief SystemUtil::SystemUtil
+ * @param parent
+ * Constructor to initialize to top command
+ */
 SystemUtil::SystemUtil( QObject *parent )
-    : QObject( parent )
-{
+    : QObject( parent ){
+
     mProcessList = new QList<Process>();
 
     mTopProcess  =  new QProcess( parent );
@@ -17,9 +22,9 @@ SystemUtil::SystemUtil( QObject *parent )
     mTopProcess -> start( mProcess , mArguments );
 
 
-    if( !mTopProcess->waitForStarted() )
+    if( !mTopProcess->waitForStarted() ) {
         qDebug() << "ERROR : " << mTopProcess->error();
-
+    }
 
     mTopProcess->waitForFinished() ;
 
@@ -30,23 +35,30 @@ SystemUtil::SystemUtil( QObject *parent )
 
 }
 
-SystemUtil::~SystemUtil()
-{
+/**
+ * @brief SystemUtil::~SystemUtil
+ * Destructor
+ */
+SystemUtil::~SystemUtil(){
     delete mProcessList;
 }
 
-QList<Process> *SystemUtil::parseProcesses()
-{
+/**
+ * @brief SystemUtil::parseProcesses
+ * @return list of processes
+ */
+QList<Process>* SystemUtil::parseProcesses(){
+
     // loop start from 9 because mOutputList.at( 9 ) contains the first process in the list
-    for(int  i = 9 ; i < mOutputList.size() ; i++ )
-    {
+    for(int  i = 9 ; i < mOutputList.size() ; i++ ){
+
         QString str = mOutputList.at( i ) ;
 
         // splits one process string on the basis of whitespaces.
-        QStringList splittedString = str.split( QRegExp("\\s") , QString::SkipEmptyParts );
+        QStringList splittedString = str.split( QRegExp("\\s"), QString::SkipEmptyParts );
 
         //splits the numerical value of memory from string on the basis of m
-        QStringList memValue = splittedString[ 5 ].split( QRegExp("m") , QString::SkipEmptyParts );
+        QStringList memValue = splittedString[ 5 ].split( QRegExp("m"), QString::SkipEmptyParts );
 
         QString pName   = splittedString.last() ;
         QString user    = splittedString[ 1 ] ;
@@ -54,7 +66,7 @@ QList<Process> *SystemUtil::parseProcesses()
         float cpuUsage  = splittedString[ 6 ].toDouble();
         double memUsage = memValue[0].toDouble();
 
-        Process p( pID , pName , cpuUsage , memUsage , user);
+        Process p( pID, pName, cpuUsage, memUsage, user);
 
         mProcessList->append( p );
 

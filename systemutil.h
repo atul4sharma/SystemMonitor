@@ -7,23 +7,32 @@
 #include <QProcess>
 #include <QList>
 
+/**
+ * @brief The SystemUtil class
+ * This class handles backend of getting data from top command and parsing it according to the requirement
+ */
 class SystemUtil : public QObject
 {
 
     Q_OBJECT
 
     QProcess     *mTopProcess; //qprocess top handle the subprocess 'top'
-    QString      mProcess;     //the path of subprocess 'top'
-    QStringList  mEnv;         //sets necessary TERM environment variable required for top command
-    QStringList  mArguments;   //arguments list to handle 'top' process properly
-    QString      mOutputString;
-    QStringList  mOutputList;
+    QString       mProcess;     //the path of subprocess 'top'
+    QStringList   mEnv;         //sets necessary TERM environment variable required for top command
+    QStringList   mArguments;   //arguments list to handle 'top' process properly
+    QString       mOutputString;
+    QStringList   mOutputList;
 
-    QList<Process> *mProcessList;
+    QList<Process>* mProcessList;
 
 public:
     explicit SystemUtil(QObject *parent = 0);
     ~SystemUtil();
+
+    /**
+     * @brief parseProcesses
+     * @return list of Processes
+     */
     QList<Process>* parseProcesses();
 
 signals:
