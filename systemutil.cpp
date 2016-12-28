@@ -89,3 +89,32 @@ void SystemUtil::parseProcesses(){
 
 }
 
+
+QList<Disk>* SystemUtil::getDiskList(){
+
+    mDiskList = new QList<Disk>();
+    analyzeDisk();
+
+    return mDiskList;
+}
+
+void SystemUtil::analyzeDisk(){
+
+    foreach ( const QStorageInfo &disk, QStorageInfo::mountedVolumes()) {
+        if( disk.isValid() && disk.isReady() ){
+            if( !disk.isReadOnly() ){
+
+                Disk d(disk.displayName() ,
+                       disk.rootPath() ,
+                       disk.bytesAvailable() ,
+                       disk.bytesTotal() ,
+                       disk.fileSystemType() ,
+                       disk.device());
+
+                mDiskList->append(d);
+
+            }
+        }
+    }
+}
+

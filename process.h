@@ -10,7 +10,7 @@
  */
 class Process
 {
-    quint64    mProcessId;
+    quint64 mProcessId;
     QString mProcessName;
     float   mCpuUsage;
     double  mMemoryUsage;
@@ -26,7 +26,7 @@ public:
                      QString User);
     void showInfo() const;
 
-    quint64    getProcessId() const;
+    quint64 getProcessId() const;
     QString getProcessName() const;
     float   getCpuUsage() const;
     double  getMemoryUsage() const;

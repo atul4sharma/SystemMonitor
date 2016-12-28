@@ -2,6 +2,7 @@
 #define SYSTEMUTIL_H
 
 #include "process.h"
+#include "disk.h"
 
 #include <QObject>
 #include <QProcess>
@@ -24,14 +25,16 @@ class SystemUtil : public QObject
     QStringList   mOutputList;
 
     QList<Process>* mProcessList;
+    QList<Disk>* mDiskList;
 
 public:
     explicit SystemUtil(QObject *parent = 0);
     ~SystemUtil();
     QList<Process>* getProcessesList();
+    QList<Disk>* getDiskList();
+
     void parseProcesses();
-
-
+    void analyzeDisk();
 
 signals:
 

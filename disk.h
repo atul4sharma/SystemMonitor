@@ -21,12 +21,14 @@ public:
                   QString FileSystemType ,
                   QString Device);
 
-    QString getName();
-    QString getRootPath();
-    quint64 getAvailableBytes();
-    quint64 getTotalBytes();
-    QString getFileSystemType();
-    QString getDevice();
+    QString getName() const;
+    QString getRootPath() const;
+    quint64 getAvailableBytes() const;
+    quint64 getTotalBytes() const;
+    QString getFileSystemType() const;
+    QString getDevice() const;
+
+    void showInfo() const;
 
 };
 

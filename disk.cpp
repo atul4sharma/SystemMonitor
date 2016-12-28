@@ -1,5 +1,7 @@
 #include "disk.h"
 
+#include <QDebug>
+
 Disk::Disk()
 {
 
@@ -21,26 +23,37 @@ Disk::Disk(QString Name ,
 
 }
 
-QString Disk::getName(){
+QString Disk::getName() const{
     return this->mName ;
 }
 
-QString Disk::getRootPath(){
+QString Disk::getRootPath() const{
     return this->mRootPath ;
 }
 
-quint64 Disk::getAvailableBytes(){
+quint64 Disk::getAvailableBytes() const{
     return this->mAvailableBytes ;
 }
 
-quint64 Disk::getTotalBytes(){
+quint64 Disk::getTotalBytes() const{
     return this->mTotalBytes ;
 }
 
-QString Disk::getFileSystemType(){
+QString Disk::getFileSystemType() const{
     return this->mFileSystemType ;
 }
 
-QString Disk::getDevice(){
+QString Disk::getDevice() const{
     return this->mDevice ;
+}
+
+void Disk::showInfo() const{
+    qDebug() << "---------------- DISK INFO ------------------";
+    qDebug() << "Name . . . . . . : " << getName();
+    qDebug() << "Root path. . . . : " << getRootPath();
+    qDebug() << "Available bytes. : " << getAvailableBytes()/1024/1024 << " MB .";
+    qDebug() << "Total bytes. . . : " << getTotalBytes()/1024/1024 << " MB .";
+    qDebug() << "File System type : " << getFileSystemType() ;
+    qDebug() << "Device . . . . . : " << getDevice();
+    qDebug() << "---------------------------------------------";
 }
