@@ -1,8 +1,6 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
-typedef unsigned int UINT;
-
 #include <QString>
 #include <QDebug>
 
@@ -12,7 +10,7 @@ typedef unsigned int UINT;
  */
 class Process
 {
-    UINT    mProcessId;
+    quint64    mProcessId;
     QString mProcessName;
     float   mCpuUsage;
     double  mMemoryUsage;
@@ -21,20 +19,20 @@ class Process
 public:
     explicit Process();
 
-    explicit Process(UINT ProcessId,
+    explicit Process(quint64 ProcessId,
                      QString ProcessName,
                      float CpuUsage,
                      double MemoryUsage,
                      QString User);
     void showInfo() const;
 
-    UINT    getProcessId() const;
+    quint64    getProcessId() const;
     QString getProcessName() const;
     float   getCpuUsage() const;
     double  getMemoryUsage() const;
     QString getUser() const;
 
-    void setProcessId(UINT val);
+    void setProcessId(quint64 val);
     void setProcessName( QString str);
     void setCpuUsage( float val);
     void setMemoryUsage( double val );

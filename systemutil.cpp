@@ -77,7 +77,7 @@ void SystemUtil::parseProcesses(){
 
         QString pName   = splittedString.last() ;
         QString user    = splittedString[ 1 ] ;
-        UINT pID        = splittedString[ 0 ].toLong();
+        quint64 pID     = splittedString[ 0 ].toLong();
         float cpuUsage  = splittedString[ 6 ].toDouble();
         double memUsage = memValue[0].toDouble();
 

@@ -14,7 +14,7 @@ Process::Process(){
  * @param MemoryUsage      Memory usage by process
  * @param User             User that has invoked the process
  */
-Process::Process(UINT ProcessId, QString ProcessName, float CpuUsage, double MemoryUsage, QString User){
+Process::Process(quint64 ProcessId, QString ProcessName, float CpuUsage, double MemoryUsage, QString User){
 
     mProcessId   = ProcessId ;
     mProcessName = ProcessName ;
@@ -46,7 +46,7 @@ void Process::showInfo() const{
  * @brief Process::getProcessId
  * @return mProcessId
  */
-UINT Process::getProcessId() const{
+quint64 Process::getProcessId() const{
     return this->mProcessId;
 }
 
@@ -91,7 +91,7 @@ QString Process::getUser() const{
  * @param val
  * sets mProcessId to val
  */
-void Process::setProcessId( UINT val ){
+void Process::setProcessId( quint64 val ){
     this->mProcessId = val ;
 }
 
