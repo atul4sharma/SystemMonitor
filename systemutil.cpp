@@ -8,7 +8,8 @@
  * Constructor to initialize variables
  */
 SystemUtil::SystemUtil( QObject *parent )
-    : QObject( parent ){
+    : QObject( parent )
+{
 
     mTopProcess  =  new QProcess( parent );
 
@@ -89,7 +90,10 @@ void SystemUtil::parseProcesses(){
 
 }
 
-
+/**
+ * @brief SystemUtil::getDiskList
+ * @return list of disks
+ */
 QList<Disk>* SystemUtil::getDiskList(){
 
     mDiskList = new QList<Disk>();
@@ -98,6 +102,10 @@ QList<Disk>* SystemUtil::getDiskList(){
     return mDiskList;
 }
 
+/**
+ * @brief SystemUtil::analyzeDisk
+ * extracts information about mounted disks
+ */
 void SystemUtil::analyzeDisk(){
 
     foreach ( const QStorageInfo &disk, QStorageInfo::mountedVolumes()) {

@@ -24,16 +24,45 @@ class SystemUtil : public QObject
     QString       mOutputString;
     QStringList   mOutputList;
 
+    /**
+     * @brief mProcessList
+     * Stores the list of processes
+     */
     QList<Process>* mProcessList;
+
+    /**
+     * @brief mDiskList
+     * Stores the list of disks
+     */
     QList<Disk>* mDiskList;
 
 public:
     explicit SystemUtil(QObject *parent = 0);
     ~SystemUtil();
+
+    /**
+     * @brief getProcessesList
+     * @return list of processes
+     */
     QList<Process>* getProcessesList();
+
+    /**
+     * @brief getDiskList
+     * @return list of disks
+     */
     QList<Disk>* getDiskList();
 
+    /**
+     * @brief SystemUtil::parseProcesses
+     * takes the output of top command, split it and store it in Process data structure
+     * appends the process to mProcessList
+     */
     void parseProcesses();
+
+    /**
+     * @brief analyzeDisk
+     * extracts information about mounted disks
+     */
     void analyzeDisk();
 
 signals:
