@@ -1,17 +1,17 @@
 #include "systemutil.h"
 #include <QDebug>
+#include <QStorageInfo>
 
 /**
  * @brief SystemUtil::SystemUtil
  * @param parent
- * Constructor to initialize to top command
+ * Constructor to initialize variables
  */
 SystemUtil::SystemUtil( QObject *parent )
     : QObject( parent ){
 
-    mProcessList = new QList<Process>();
-
     mTopProcess  =  new QProcess( parent );
+
     mEnv         =  QProcess::systemEnvironment();
 
     mEnv << "TERM=vt100" << "COLUMNS=512";
@@ -19,6 +19,17 @@ SystemUtil::SystemUtil( QObject *parent )
     mArguments << "-b" << "-n" << "1" ;
 
     mTopProcess -> setEnvironment( mEnv );
+
+}
+
+/**
+ * @brief SystemUtil::getProcessesList
+ * @return list of processes
+ */
+QList<Process>* SystemUtil::getProcessesList(){
+
+    mProcessList = new QList<Process>();
+
     mTopProcess -> start( mProcess , mArguments );
 
 
@@ -32,6 +43,9 @@ SystemUtil::SystemUtil( QObject *parent )
 
     mOutputList = mOutputString.split('\n' , QString::SkipEmptyParts );
 
+    parseProcesses();
+
+    return mProcessList;
 
 }
 
@@ -45,9 +59,10 @@ SystemUtil::~SystemUtil(){
 
 /**
  * @brief SystemUtil::parseProcesses
- * @return list of processes
+ * takes the output of top command, split it and store it in Process data structure
+ * appends the process to mProcessList
  */
-QList<Process>* SystemUtil::parseProcesses(){
+void SystemUtil::parseProcesses(){
 
     // loop start from 9 because mOutputList.at( 9 ) contains the first process in the list
     for(int  i = 9 ; i < mOutputList.size() ; i++ ){
@@ -72,5 +87,5 @@ QList<Process>* SystemUtil::parseProcesses(){
 
     }
 
-    return mProcessList;
 }
+

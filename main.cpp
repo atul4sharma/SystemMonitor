@@ -3,15 +3,18 @@
 #include "systemutil.h"
 
 int main(int argc, char *argv[]){
-
     QCoreApplication a(argc, argv);
 
     SystemUtil *subProcess = new SystemUtil();
-    QList<Process> *processList = subProcess->parseProcesses();
+
+    QList<Process> *processList = subProcess->getProcessesList();
 
     for( int  i = 0 ; i < processList->size() ; i++ ){
         processList->at( i ).showInfo();
     }
+
+
+
 
     return a.exec();
 }

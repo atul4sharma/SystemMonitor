@@ -9,7 +9,7 @@
 
 /**
  * @brief The SystemUtil class
- * This class handles backend of getting data from top command and parsing it according to the requirement
+ * This class handles backend of getting data
  */
 class SystemUtil : public QObject
 {
@@ -28,12 +28,10 @@ class SystemUtil : public QObject
 public:
     explicit SystemUtil(QObject *parent = 0);
     ~SystemUtil();
+    QList<Process>* getProcessesList();
+    void parseProcesses();
 
-    /**
-     * @brief parseProcesses
-     * @return list of Processes
-     */
-    QList<Process>* parseProcesses();
+
 
 signals:
 
