@@ -28,4 +28,5 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += \
     process.h \
     systemutil.h \
-    disk.h
+    disk.h \
+    defs.h
