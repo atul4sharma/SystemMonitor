@@ -12,7 +12,8 @@ TEMPLATE = app
 SOURCES += main.cpp \
     process.cpp \
     systemutil.cpp \
-    disk.cpp
+    disk.cpp \
+    logger.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -29,4 +30,5 @@ HEADERS += \
     process.h \
     systemutil.h \
     disk.h \
-    defs.h
+    defs.h \
+    logger.h
