@@ -3,6 +3,7 @@
 
 #include "process.h"
 #include "disk.h"
+#include "defs.h"
 
 #include <QObject>
 #include <QProcess>
@@ -24,17 +25,6 @@ class SystemUtil : public QObject
     QString       mOutputString;
     QStringList   mOutputList;
 
-    /**
-     * @brief mProcessList
-     * Stores the list of processes
-     */
-    QList<Process>* mProcessList;
-
-    /**
-     * @brief mDiskList
-     * Stores the list of disks
-     */
-    QList<Disk>* mDiskList;
 
 public:
     explicit SystemUtil(QObject *parent = 0);
@@ -42,28 +32,34 @@ public:
 
     /**
      * @brief getProcessesList
-     * @return list of processes
+     * @param processList        - contains list of Processes
+     * @return exit_status
+     *
+     * Execute top process to analyze the current system status
+     * and populate the processList with Process objects
      */
-    QList<Process>* getProcessesList();
+    int getProcessesList(QList<Process> *processList);
 
     /**
      * @brief getDiskList
-     * @return list of disks
+     * @param diskList           - contains list of Disks
+     * @return exit_status
+     *
+     * Analyze the details of disks that are mounted on the system
+     * and poplutes the diskList with Disk object
      */
-    QList<Disk>* getDiskList();
+    int getDiskList(QList<Disk> *diskList);
 
     /**
-     * @brief SystemUtil::parseProcesses
+     * @brief parseProcesses
+     * @param processList
+     * @return exit_status
+     *
      * takes the output of top command, split it and store it in Process data structure
-     * appends the process to mProcessList
+     * appends the process to processList
      */
-    void parseProcesses();
+    int parseProcesses(QList<Process> *processList);
 
-    /**
-     * @brief analyzeDisk
-     * extracts information about mounted disks
-     */
-    void analyzeDisk();
 
 signals:
 

@@ -14,26 +14,52 @@ SystemUtil::SystemUtil( QObject *parent )
     mTopProcess  =  new QProcess( parent );
 
     mEnv         =  QProcess::systemEnvironment();
-
+    //---------------------------------------------------------//
+    // Note:-
+    // top command requires the value of  TERM environment variable
+    // for execution of the process
+    //
+    // top command contains maximum 512 characters in single row and
+    // hence we need to redefine COLUMNS environment variable also
+    //
+    //---------------------------------------------------------//
     mEnv << "TERM=vt100" << "COLUMNS=512";
+
     mProcess = "top";
+    //---------------------------------------------------------//
+    // -b        for batch output
+    // -n        for number of iterations
+    //---------------------------------------------------------//
     mArguments << "-b" << "-n" << "1" ;
 
     mTopProcess -> setEnvironment( mEnv );
 
 }
 
+
+/**
+ * @brief SystemUtil::~SystemUtil
+ * Destructor
+ */
+SystemUtil::~SystemUtil(){
+
+}
+
 /**
  * @brief SystemUtil::getProcessesList
- * @return list of processes
+ * @param processList        - contains list of Processes
+ * @return exit_status
+ *
+ * Execute top process to analyze the current system status
+ * and populate the processList with Process objects
  */
-QList<Process>* SystemUtil::getProcessesList(){
-
-    mProcessList = new QList<Process>();
+int SystemUtil::getProcessesList(QList<Process> *processList){
 
     mTopProcess -> start( mProcess , mArguments );
 
-
+    //---------------------------------------------------------//
+    // to check whether mTopProcess has started or not
+    //---------------------------------------------------------//
     if( !mTopProcess->waitForStarted() ) {
         qDebug() << "ERROR : " << mTopProcess->error();
     }
@@ -44,36 +70,36 @@ QList<Process>* SystemUtil::getProcessesList(){
 
     mOutputList = mOutputString.split('\n' , QString::SkipEmptyParts );
 
-    parseProcesses();
+    return parseProcesses(processList);
 
-    return mProcessList;
-
-}
-
-/**
- * @brief SystemUtil::~SystemUtil
- * Destructor
- */
-SystemUtil::~SystemUtil(){
-    delete mProcessList;
 }
 
 /**
  * @brief SystemUtil::parseProcesses
+ * @param processList
+ * @return exit_status
+ *
  * takes the output of top command, split it and store it in Process data structure
- * appends the process to mProcessList
+ * appends the process to processList
  */
-void SystemUtil::parseProcesses(){
+int SystemUtil::parseProcesses(QList<Process> *processList){
 
-    // loop start from 9 because mOutputList.at( 9 ) contains the first process in the list
+    //---------------------------------------------------------//
+    // loop start from 9 because mOutputList.at( 9 )
+    // contains the first process in the list
+    //---------------------------------------------------------//
     for(int  i = 9 ; i < mOutputList.size() ; i++ ){
 
         QString str = mOutputList.at( i ) ;
 
+        //---------------------------------------------------------//
         // splits one process string on the basis of whitespaces.
+        //---------------------------------------------------------//
         QStringList splittedString = str.split( QRegExp("\\s"), QString::SkipEmptyParts );
 
+        //------------------------------------------------------------------//
         //splits the numerical value of memory from string on the basis of m
+        //------------------------------------------------------------------//
         QStringList memValue = splittedString[ 5 ].split( QRegExp("m"), QString::SkipEmptyParts );
 
         QString pName   = splittedString.last() ;
@@ -84,29 +110,23 @@ void SystemUtil::parseProcesses(){
 
         Process p( pID, pName, cpuUsage, memUsage, user);
 
-        mProcessList->append( p );
+        processList->append( p );
 
     }
+
+    return ST_SUCCESS;
 
 }
 
 /**
  * @brief SystemUtil::getDiskList
- * @return list of disks
+ * @param diskList           - contains list of Disks
+ * @return exit_status
+ *
+ * Analyze the details of disks that are mounted on the system
+ * and poplutes the diskList with Disk object
  */
-QList<Disk>* SystemUtil::getDiskList(){
-
-    mDiskList = new QList<Disk>();
-    analyzeDisk();
-
-    return mDiskList;
-}
-
-/**
- * @brief SystemUtil::analyzeDisk
- * extracts information about mounted disks
- */
-void SystemUtil::analyzeDisk(){
+int SystemUtil::getDiskList(QList<Disk> *diskList){
 
     foreach ( const QStorageInfo &disk, QStorageInfo::mountedVolumes()) {
         if( disk.isValid() && disk.isReady() ){
@@ -119,10 +139,11 @@ void SystemUtil::analyzeDisk(){
                        disk.fileSystemType() ,
                        disk.device());
 
-                mDiskList->append(d);
+                diskList->append(d);
 
             }
         }
     }
-}
 
+    return ST_SUCCESS;
+}
