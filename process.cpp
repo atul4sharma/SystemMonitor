@@ -4,10 +4,7 @@
  * @brief Process::Process
  * Data structure to store the required process information
  */
-Process::Process()
-{
-
-}
+Process::Process() {}
 
 /**
  * @brief Process::Process
@@ -17,19 +14,19 @@ Process::Process()
  * @param MemoryUsage      Memory usage by process
  * @param User             User that has invoked the process
  */
-Process::Process(quint64 ProcessId ,
-                 QString ProcessName ,
-                 float CpuUsage ,
-                 double MemoryUsage ,
+Process::Process(quint64 ProcessId,
+                 QString ProcessName,
+                 float CpuUsage,
+                 double MemoryUsage,
                  QString User)
 
 {
 
-    mProcessId   = ProcessId ;
-    mProcessName = ProcessName ;
-    mCpuUsage    = CpuUsage ;
-    mMemoryUsage = MemoryUsage ;
-    mUser        = User ;
+    mProcessId   = ProcessId;
+    mProcessName = ProcessName;
+    mCpuUsage    = CpuUsage;
+    mMemoryUsage = MemoryUsage;
+    mUser        = User;
 
 }
 

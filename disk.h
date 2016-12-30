@@ -32,11 +32,11 @@ public:
      * @param FileSystemType - Stores file system type
      * @param Device         - Stores device name
      */
-    explicit Disk(QString Name ,
-                  QString RootPath ,
-                  quint64 AvailableBytes ,
-                  quint64 TotalBytes ,
-                  QString FileSystemType ,
+    explicit Disk(QString Name,
+                  QString RootPath,
+                  quint64 AvailableBytes,
+                  quint64 TotalBytes,
+                  QString FileSystemType,
                   QString Device);
 
     /**

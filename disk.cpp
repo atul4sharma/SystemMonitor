@@ -6,10 +6,8 @@
  * @brief Disk::Disk
  * Default constructor
  */
-Disk::Disk()
-{
+Disk::Disk() {}
 
-}
 
 /**
  * @brief Disk::Disk     Parametrized constructor
@@ -20,18 +18,18 @@ Disk::Disk()
  * @param FileSystemType - Stores file system type
  * @param Device         - Stores device name
  */
-Disk::Disk(QString Name ,
-           QString RootPath ,
-           quint64 AvailableBytes ,
-           quint64 TotalBytes ,
-           QString FileSystemType ,
+Disk::Disk(QString Name,
+           QString RootPath,
+           quint64 AvailableBytes,
+           quint64 TotalBytes,
+           QString FileSystemType,
            QString Device)
 {
-    mName            = Name ;
-    mRootPath        = RootPath ;
-    mAvailableBytes  = AvailableBytes ;
-    mTotalBytes      = TotalBytes ;
-    mFileSystemType  = FileSystemType ;
+    mName            = Name;
+    mRootPath        = RootPath;
+    mAvailableBytes  = AvailableBytes;
+    mTotalBytes      = TotalBytes;
+    mFileSystemType  = FileSystemType;
     mDevice          = Device;
 
 }
@@ -41,7 +39,7 @@ Disk::Disk(QString Name ,
  * @return mName
  */
 QString Disk::getName() const{
-    return this->mName ;
+    return this->mName;
 }
 
 /**
@@ -50,7 +48,7 @@ QString Disk::getName() const{
  */
 
 QString Disk::getRootPath() const{
-    return this->mRootPath ;
+    return this->mRootPath;
 }
 
 /**
@@ -58,7 +56,7 @@ QString Disk::getRootPath() const{
  * @return mAvailableBytes
  */
 quint64 Disk::getAvailableBytes() const{
-    return this->mAvailableBytes ;
+    return this->mAvailableBytes;
 }
 
 /**
@@ -66,7 +64,7 @@ quint64 Disk::getAvailableBytes() const{
  * @return mTotalBytes
  */
 quint64 Disk::getTotalBytes() const{
-    return this->mTotalBytes ;
+    return this->mTotalBytes;
 }
 
 /**
@@ -74,7 +72,7 @@ quint64 Disk::getTotalBytes() const{
  * @return mFileSystemType
  */
 QString Disk::getFileSystemType() const{
-    return this->mFileSystemType ;
+    return this->mFileSystemType;
 }
 
 /**
@@ -82,7 +80,7 @@ QString Disk::getFileSystemType() const{
  * @return mDevice
  */
 QString Disk::getDevice() const{
-    return this->mDevice ;
+    return this->mDevice;
 }
 
 /**
