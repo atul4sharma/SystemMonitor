@@ -13,6 +13,8 @@ int main(int argc, char *argv[]){
 
     if(processReturnCode == ST_FAILED) {
         qDebug() << ERROR_MESSAGE;
+    } else {
+        qDebug() << "Successfully got Process list . . .";
     }
 
     //LOG_PROCESS (processList);
@@ -23,6 +25,8 @@ int main(int argc, char *argv[]){
 
     if(diskReturnCode == ST_FAILED) {
         qDebug() << ERROR_MESSAGE;
+    } else {
+        qDebug() << "Successfully got Disk list . . .";
     }
 
     //LOG_DISK (diskList);
@@ -32,6 +36,8 @@ int main(int argc, char *argv[]){
 
     if(networkSocketReturnCode == ST_FAILED) {
         qDebug() << ERROR_MESSAGE;
+    } else {
+        qDebug() << "Successfully got Socket list . . .";
     }
 
     //LOG_SOCKET ( socketList);

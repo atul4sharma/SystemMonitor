@@ -50,6 +50,8 @@ SystemUtil::~SystemUtil(){
  */
 int SystemUtil::getProcessesList(QList<Process> *processList){
 
+    qDebug() <<"Getting Process List . . . . . . . . . ";
+
     mProcess = "top";
     //---------------------------------------------------------//
     // -b        for batch output
@@ -132,6 +134,8 @@ int SystemUtil::parseProcesses(QList<Process> *processList){
  */
 int SystemUtil::getDiskList(QList<Disk> *diskList){
 
+    qDebug() <<"Getting Disk List . . . . . . . . . ";
+
     foreach ( const QStorageInfo &disk, QStorageInfo::mountedVolumes()) {
         if( disk.isValid() && disk.isReady() ){
             if( !disk.isReadOnly() ){
@@ -154,6 +158,8 @@ int SystemUtil::getDiskList(QList<Disk> *diskList){
 
 
 int SystemUtil::getSocketList(QList<NetworkSocket> *socketList){
+
+    qDebug() <<"Getting Socket List . . . . . . . . . ";
 
     mProcess = "netstat";
 
@@ -217,12 +223,21 @@ int SystemUtil::parseSockets(QList<NetworkSocket> *socketList){
         quint64  PID;
         QString  ProgramName;
 
+        //------------------------------------------------------------//
+        // Size of splittedString should be 7
+        // if it is not 7, then it means that one column value is missing
+        // and that column in state columns
+        //------------------------------------------------------------//
         if(splittedString.size() < 7) {
             State = "";
         } else {
             State = splittedString.at(5);
         }
 
+        //------------------------------------------------------------//
+        // If splittedString.last value is equal to "-"
+        // this implies that no program is using it
+        //------------------------------------------------------------//
         if(splittedString.last() == "-") {
             PID         = 0L;
             ProgramName = "";
@@ -233,7 +248,6 @@ int SystemUtil::parseSockets(QList<NetworkSocket> *socketList){
             PID         = splittedLastColumn.at(0).toLong();
             ProgramName = splittedLastColumn.at(1);
         }
-
 
         s.setProtocolType( ProtocolType);
         s.setReceiveQ( ReceiveQ);
@@ -247,8 +261,6 @@ int SystemUtil::parseSockets(QList<NetworkSocket> *socketList){
         socketList->append(s);
 
     }
-
-
 
     return ST_SUCCESS;
 }

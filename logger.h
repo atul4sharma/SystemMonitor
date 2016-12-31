@@ -19,6 +19,6 @@ public:
 //-----------------------------------------
 #define LOG_PROCESS(PTABLE)   Logger::printProcessLog ( PTABLE )
 #define LOG_DISK(PTABLE)      Logger::printDiskLog ( PTABLE )
-#define LOG_SOCKET(PTABLE)    Logger::printSocketLog( PTABLE);
+#define LOG_SOCKET(PTABLE)    Logger::printSocketLog( PTABLE )
 
 #endif // LOGGER_H
