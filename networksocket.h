@@ -56,6 +56,17 @@ public:
     quint64  getPID() const;
     QString  getProgramName() const;
 
+    void setProtocolType(QString Protocol);
+    void setReceiveQ(quint64 ReceiveQ);
+    void setSendQ(quint64 SendQ);
+    void setLocalAddress(QString LocalAddress);
+    void setForeignAddress(QString ForeignAddress);
+    void setState(QString State);
+    void setPID(quint64 PID);
+    void setProgramName(QString ProgramName);
+
+    void showInfo() const;
+
 };
 
 #endif // NETWORKSOCKET_H
