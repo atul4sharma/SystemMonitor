@@ -3,6 +3,7 @@
 
 #include "process.h"
 #include "disk.h"
+#include "networksocket.h"
 #include "defs.h"
 
 #include <QObject>
@@ -18,10 +19,11 @@ class SystemUtil : public QObject
 
     Q_OBJECT
 
-    QProcess     *mTopProcess; //qprocess top handle the subprocess 'top'
-    QString       mProcess;     //the path of subprocess 'top'
-    QStringList   mEnv;         //sets necessary TERM environment variable required for top command
-    QStringList   mArguments;   //arguments list to handle 'top' process properly
+    QProcess     *mTopProcess;      // Qprocess mTopProcess handle the subprocess 'top'
+    QProcess     *mNetstatProcess;  // QProcess mNetstatProcess handle the subprocess 'netstat'
+    QString       mProcess;         // The path of subprocess 'top'
+    QStringList   mEnv;             // Sets necessary TERM environment variable required for top command
+    QStringList   mArguments;       // Arguments list to handle 'top' process properly
     QString       mOutputString;
     QStringList   mOutputList;
 
@@ -51,6 +53,16 @@ public:
     int getDiskList(QList<Disk> *diskList);
 
     /**
+     * @brief getSocketList
+     * @param socketList         - contains list of Sockets
+     * @return exit_status
+     *
+     * Execute netstat process to analyze the current system status
+     * and populate the socketList with NetworkSocket objects
+     */
+    int getSocketList(QList<NetworkSocket> *socketList);
+
+    /**
      * @brief parseProcesses
      * @param processList
      * @return exit_status
@@ -59,6 +71,16 @@ public:
      * appends the process to processList
      */
     int parseProcesses(QList<Process> *processList);
+
+    /**
+     * @brief parseSockets
+     * @param socketList
+     * @return exit_status
+     *
+     * takes the output of netstat command, split it and store it in NetworkSocket data structure
+     * appends the process to socketList
+     */
+    int parseSockets(QList<NetworkSocket> *socketList);
 
 
 signals:

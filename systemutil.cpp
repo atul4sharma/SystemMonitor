@@ -11,9 +11,10 @@ SystemUtil::SystemUtil( QObject *parent )
     : QObject( parent )
 {
 
-    mTopProcess  =  new QProcess( parent );
+    mTopProcess      =  new QProcess(parent);
+    mNetstatProcess  =  new QProcess(parent);
 
-    mEnv         =  QProcess::systemEnvironment();
+    mEnv             =  QProcess::systemEnvironment();
     //---------------------------------------------------------//
     // Note:-
     // top command requires the value of  TERM environment variable
@@ -25,13 +26,6 @@ SystemUtil::SystemUtil( QObject *parent )
     //---------------------------------------------------------//
     mEnv << "TERM=vt100" << "COLUMNS=512";
 
-    mProcess = "top";
-    //---------------------------------------------------------//
-    // -b        for batch output
-    // -n        for number of iterations
-    //---------------------------------------------------------//
-    mArguments << "-b" << "-n" << "1" ;
-
     mTopProcess -> setEnvironment( mEnv );
 
 }
@@ -42,7 +36,8 @@ SystemUtil::SystemUtil( QObject *parent )
  * Destructor
  */
 SystemUtil::~SystemUtil(){
-
+    delete mTopProcess;
+    delete mNetstatProcess;
 }
 
 /**
@@ -55,6 +50,13 @@ SystemUtil::~SystemUtil(){
  */
 int SystemUtil::getProcessesList(QList<Process> *processList){
 
+    mProcess = "top";
+    //---------------------------------------------------------//
+    // -b        for batch output
+    // -n        for number of iterations
+    //---------------------------------------------------------//
+    mArguments << "-b" << "-n" << "1" ;
+
     mTopProcess -> start( mProcess , mArguments );
 
     //---------------------------------------------------------//
@@ -66,8 +68,10 @@ int SystemUtil::getProcessesList(QList<Process> *processList){
 
     mTopProcess->waitForFinished() ;
 
+    mOutputString.clear();
     mOutputString = QString( mTopProcess -> readAll() );
 
+    mOutputList.clear();
     mOutputList = mOutputString.split('\n' , QString::SkipEmptyParts );
 
     return parseProcesses(processList);
@@ -147,3 +151,105 @@ int SystemUtil::getDiskList(QList<Disk> *diskList){
 
     return ST_SUCCESS;
 }
+
+
+int SystemUtil::getSocketList(QList<NetworkSocket> *socketList){
+
+    mProcess = "netstat";
+
+    mArguments << "-a" << "-p" << "--inet";
+
+    mNetstatProcess->start(mProcess, mArguments);
+
+    //---------------------------------------------------------//
+    // to check whether mNetstatProcess has started or not
+    //---------------------------------------------------------//
+    if( !mNetstatProcess->waitForStarted() ) {
+        qDebug() << "ERROR : " << mNetstatProcess->error();
+    }
+
+    mNetstatProcess->waitForFinished();
+
+    mOutputString.clear();
+    mOutputString = QString( mNetstatProcess -> readAll() );
+
+    mOutputList.clear();
+    mOutputList = mOutputString.split('\n' , QString::SkipEmptyParts );
+
+
+    return parseSockets(socketList);
+}
+
+
+/**
+ * @brief SystemUtil::parseSockets
+ * @param socketList
+ * @return exit_status
+ *
+ * takes the output of netstat command, split it and store it in NetworkSocket data structure
+ * appends the process to socketList
+ */
+int SystemUtil::parseSockets(QList<NetworkSocket> *socketList){
+
+    //---------------------------------------------------------//
+    // loop start from 2 because mOutputList.at( 2 )
+    // contains the first socket information in the list
+    //---------------------------------------------------------//
+    for(int i = 2; i < mOutputList.size(); i++) {
+
+
+        QString str = mOutputList.at( i ) ;
+
+        //---------------------------------------------------------//
+        // splits one socket string on the basis of whitespaces.
+        //---------------------------------------------------------//
+        QStringList splittedString = str.split( QRegExp("\\s"), QString::SkipEmptyParts );
+
+        NetworkSocket s;
+
+        QString  ProtocolType   = splittedString.at(0);
+        quint64  ReceiveQ       = splittedString.at(1).toLong();
+        quint64  SendQ          = splittedString.at(2).toLong();
+        QString  LocalAddress   = splittedString.at(3);
+        QString  ForeignAddress = splittedString.at(4);
+
+        QString  State;
+        quint64  PID;
+        QString  ProgramName;
+
+        if(splittedString.size() < 7) {
+            State = "";
+        } else {
+            State = splittedString.at(5);
+        }
+
+        if(splittedString.last() == "-") {
+            PID         = 0L;
+            ProgramName = "";
+        } else {
+            QString     lastColumnValue     = splittedString.last();
+            QStringList splittedLastColumn  = lastColumnValue.split(QRegExp("/"));
+
+            PID         = splittedLastColumn.at(0).toLong();
+            ProgramName = splittedLastColumn.at(1);
+        }
+
+
+        s.setProtocolType( ProtocolType);
+        s.setReceiveQ( ReceiveQ);
+        s.setSendQ( SendQ);
+        s.setLocalAddress( LocalAddress);
+        s.setForeignAddress( ForeignAddress);
+        s.setState( State);
+        s.setPID( PID);
+        s.setProgramName( ProgramName);
+
+        socketList->append(s);
+
+    }
+
+
+
+    return ST_SUCCESS;
+}
+
