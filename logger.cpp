@@ -14,3 +14,10 @@ void Logger::printProcessLog (QList<Process> *pList){
     }
 
 }
+
+void Logger::printSocketLog(QList<NetworkSocket> *socketList) {
+
+    for(int i = 0 ; i < socketList->size() ; i++ ){
+        socketList->at( i ).showInfo();
+    }
+}

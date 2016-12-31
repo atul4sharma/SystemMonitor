@@ -8,24 +8,33 @@ int main(int argc, char *argv[]){
 
     SystemUtil* subProcess = new SystemUtil();
 
-    QList<Process> *processList = new QList<Process>();
-    int processReturnCode = subProcess->getProcessesList( processList );
+//    QList<Process> *processList = new QList<Process>();
+//    int processReturnCode = subProcess->getProcessesList( processList );
 
-    if(processReturnCode == ST_FAILED) {
+//    if(processReturnCode == ST_FAILED) {
+//        qDebug() << ERROR_MESSAGE;
+//    }
+
+//    //LOG_PROCESS (processList);
+
+
+//    QList<Disk> *diskList = new QList<Disk>();
+//    int diskReturnCode = subProcess->getDiskList( diskList );
+
+//    if(diskReturnCode == ST_FAILED) {
+//        qDebug() << ERROR_MESSAGE;
+//    }
+
+//    //LOG_DISK (diskList);
+
+    QList<NetworkSocket> *socketList = new QList<NetworkSocket>();
+    int networkSocketReturnCode = subProcess->getSocketList(socketList);
+
+    if(networkSocketReturnCode == ST_FAILED) {
         qDebug() << ERROR_MESSAGE;
     }
 
-    LOG_PROCESS (processList);
-
-
-    QList<Disk> *diskList = new QList<Disk>();
-    int diskReturnCode = subProcess->getDiskList( diskList );
-
-    if(diskReturnCode == ST_FAILED) {
-        qDebug() << ERROR_MESSAGE;
-    }
-
-    LOG_DISK (diskList);
+    LOG_SOCKET ( socketList);
 
     return a.exec();
 }
