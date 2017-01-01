@@ -8,39 +8,40 @@ int main(int argc, char *argv[]){
 
     SystemUtil* subProcess = new SystemUtil();
 
-    QList<Process> *processList = new QList<Process>();
-    int processReturnCode = subProcess->getProcessesList( processList );
+//    QList<Process> *processList = new QList<Process>();
+//    int processReturnCode = subProcess->getProcessesList( processList );
 
-    if(processReturnCode == ST_FAILED) {
-        qDebug() << ERROR_MESSAGE;
-    } else {
-        qDebug() << "Successfully got Process list . . .";
-    }
+//    if(processReturnCode == ST_FAILED) {
+//        qDebug() << ERROR_MESSAGE;
+//    } else {
+//        qDebug() << "Successfully got Process list . . .";
+//    }
 
-    //LOG_PROCESS (processList);
+//    //LOG_PROCESS (processList);
 
 
-    QList<Disk> *diskList = new QList<Disk>();
-    int diskReturnCode = subProcess->getDiskList( diskList );
+//    QList<Disk> *diskList = new QList<Disk>();
+//    int diskReturnCode = subProcess->getDiskList( diskList );
 
-    if(diskReturnCode == ST_FAILED) {
-        qDebug() << ERROR_MESSAGE;
-    } else {
-        qDebug() << "Successfully got Disk list . . .";
-    }
+//    if(diskReturnCode == ST_FAILED) {
+//        qDebug() << ERROR_MESSAGE;
+//    } else {
+//        qDebug() << "Successfully got Disk list . . .";
+//    }
 
-    //LOG_DISK (diskList);
+//    //LOG_DISK (diskList);
 
-    QList<NetworkSocket> *socketList = new QList<NetworkSocket>();
-    int networkSocketReturnCode = subProcess->getSocketList(socketList);
+//    QList<NetworkSocket> *socketList = new QList<NetworkSocket>();
+//    int networkSocketReturnCode = subProcess->getSocketList(socketList);
 
-    if(networkSocketReturnCode == ST_FAILED) {
-        qDebug() << ERROR_MESSAGE;
-    } else {
-        qDebug() << "Successfully got Socket list . . .";
-    }
+//    if(networkSocketReturnCode == ST_FAILED) {
+//        qDebug() << ERROR_MESSAGE;
+//    } else {
+//        qDebug() << "Successfully got Socket list . . .";
+//    }
 
-    //LOG_SOCKET ( socketList);
+//    //LOG_SOCKET ( socketList);
 
+    subProcess->showBatteryDetails();
     return a.exec();
 }

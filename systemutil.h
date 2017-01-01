@@ -82,6 +82,13 @@ public:
      */
     int parseSockets(QList<NetworkSocket> *socketList);
 
+    /**
+     * @brief showBatteryDetails
+     *
+     * Shows the battery details.
+     */
+    void showBatteryDetails();
+
 
 signals:
 

@@ -265,3 +265,22 @@ int SystemUtil::parseSockets(QList<NetworkSocket> *socketList){
     return ST_SUCCESS;
 }
 
+/**
+ * @brief SystemUtil::showBatteryDetails
+ *
+ * Shows the battery details.
+ * Reads from the file "/sys/class/power_supply/BAT0/uevent"
+ */
+void SystemUtil::showBatteryDetails() {
+
+    QFile batteryDetail(QString("/sys/class/power_supply/BAT0/uevent"));
+    batteryDetail.open(QIODevice::ReadOnly);
+
+    QString str(batteryDetail.readAll());
+    QStringList strList = str.split('\n',QString::SkipEmptyParts);
+
+    for( int i = 0 ; i < strList.size() ; i++ )
+        qDebug() << strList.at( i );
+
+
+}
