@@ -81,6 +81,18 @@ public:
      */
     void showInfo() const;
 
+    /**
+     * Setter functions
+     */
+    /**-------------------------------------------------------------**/
+    void setName(QString Name);
+    void setRootPath(QString RootPath);
+    void setAvailableBytes(quint64 AvailableBytes);
+    void setTotalBytes(quint64 TotalBytes);
+    void setFileSystemType(QString FileSystemType);
+    void setDevice(QString Device);
+    /**-------------------------------------------------------------**/
+
 };
 
 #endif // DISK_H

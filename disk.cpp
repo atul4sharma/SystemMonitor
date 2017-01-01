@@ -97,3 +97,29 @@ void Disk::showInfo() const{
     qDebug() << "Device . . . . . : " << getDevice();
     qDebug() << "---------------------------------------------";
 }
+
+/**----------------------------Setter functions----------------------------**/
+void Disk::setName(QString Name){
+    mName = Name;
+}
+
+void Disk::setRootPath(QString RootPath){
+    mRootPath = RootPath;
+}
+
+void Disk::setAvailableBytes(quint64 AvailableBytes){
+    mAvailableBytes = AvailableBytes;
+}
+
+void Disk::setTotalBytes(quint64 TotalBytes){
+    mTotalBytes = TotalBytes;
+}
+
+void Disk::setFileSystemType(QString FileSystemType){
+    mFileSystemType = FileSystemType;
+}
+
+void Disk::setDevice(QString Device){
+    mDevice = Device;
+}
+/**-----------------------------------------------------------------------**/
