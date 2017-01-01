@@ -90,6 +90,7 @@ int SystemUtil::getProcessesList(QList<Process> *processList){
  */
 int SystemUtil::parseProcesses(QList<Process> *processList){
 
+    Process p;
     //---------------------------------------------------------//
     // loop start from 9 because mOutputList.at( 9 )
     // contains the first process in the list
@@ -114,7 +115,11 @@ int SystemUtil::parseProcesses(QList<Process> *processList){
         float cpuUsage  = splittedString[ 6 ].toDouble();
         double memUsage = memValue[0].toDouble();
 
-        Process p( pID, pName, cpuUsage, memUsage, user);
+        p.setProcessId(pID);
+        p.setCpuUsage(cpuUsage);
+        p.setMemoryUsage(memUsage);
+        p.setProcessName(pName);
+        p.setUser(user);
 
         processList->append( p );
 
@@ -136,16 +141,17 @@ int SystemUtil::getDiskList(QList<Disk> *diskList){
 
     qDebug() <<"Getting Disk List . . . . . . . . . ";
 
+    Disk d;
     foreach ( const QStorageInfo &disk, QStorageInfo::mountedVolumes()) {
         if( disk.isValid() && disk.isReady() ){
             if( !disk.isReadOnly() ){
 
-                Disk d(disk.displayName() ,
-                       disk.rootPath() ,
-                       disk.bytesAvailable() ,
-                       disk.bytesTotal() ,
-                       disk.fileSystemType() ,
-                       disk.device());
+                d.setName(disk.displayName());
+                d.setRootPath(disk.rootPath());
+                d.setAvailableBytes(disk.bytesAvailable());
+                d.setTotalBytes(disk.bytesTotal());
+                d.setFileSystemType(disk.fileSystemType());
+                d.setDevice(disk.device());
 
                 diskList->append(d);
 
@@ -197,6 +203,8 @@ int SystemUtil::getSocketList(QList<NetworkSocket> *socketList){
  */
 int SystemUtil::parseSockets(QList<NetworkSocket> *socketList){
 
+    NetworkSocket s;
+
     //---------------------------------------------------------//
     // loop start from 2 because mOutputList.at( 2 )
     // contains the first socket information in the list
@@ -210,8 +218,6 @@ int SystemUtil::parseSockets(QList<NetworkSocket> *socketList){
         // splits one socket string on the basis of whitespaces.
         //---------------------------------------------------------//
         QStringList splittedString = str.split( QRegExp("\\s"), QString::SkipEmptyParts );
-
-        NetworkSocket s;
 
         QString  ProtocolType   = splittedString.at(0);
         quint64  ReceiveQ       = splittedString.at(1).toLong();
