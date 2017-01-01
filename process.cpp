@@ -89,3 +89,52 @@ QString Process::getUser() const{
 }
 
 /** ------------------------------------------------------------------------------- **/
+
+/** ----------------------------- Setter Functions -------------------------------- **/
+
+/**
+ * @brief Process::setProcessId
+ * @param val
+ * sets mProcessId to val
+ */
+void Process::setProcessId( quint64 val ){
+    this->mProcessId = val ;
+}
+
+/**
+ * @brief Process::setProcessName
+ * @param str
+ * sets mProcessName to val
+ */
+void Process::setProcessName( QString str ){
+    this->mProcessName = str ;
+}
+
+/**
+ * @brief Process::setCpuUsage
+ * @param val
+ * sets mCpuUsage to val
+ */
+void Process::setCpuUsage( float val ){
+    this->mCpuUsage = val ;
+}
+
+/**
+ * @brief Process::setMemoryUsage
+ * @param val
+ * sets mMemoryUsage to val
+ */
+void Process::setMemoryUsage( double val){
+    this->mMemoryUsage = val ;
+}
+
+/**
+ * @brief Process::setUser
+ * @param str
+ * sets mUser to str
+ */
+void Process::setUser( QString str ){
+    this->mUser = str ;
+}
+
+/** ------------------------------------------------------------------------------- **/

@@ -72,6 +72,12 @@ public:
      */
     QString getUser() const;
 
+    void setProcessId(quint64 val);
+    void setProcessName( QString str);
+    void setCpuUsage( float val);
+    void setMemoryUsage( double val );
+    void setUser(QString str );
+
 };
 
 #endif // PROCESS_H
