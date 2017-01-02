@@ -25,19 +25,19 @@ public:
 
     /**
      * @brief Disk
-     * @param Name           - Stores display name of disk
-     * @param RootPath       - Stores root path of disk
-     * @param AvailableBytes - Stores available bytes of disk for user
-     * @param TotalBytes     - Stores total bytes of disk
-     * @param FileSystemType - Stores file system type
-     * @param Device         - Stores device name
+     * @param name           - Stores display name of disk
+     * @param rootPath       - Stores root path of disk
+     * @param availableBytes - Stores available bytes of disk for user
+     * @param totalBytes     - Stores total bytes of disk
+     * @param fileSystemType - Stores file system type
+     * @param device         - Stores device name
      */
-    explicit Disk(QString Name,
-                  QString RootPath,
-                  quint64 AvailableBytes,
-                  quint64 TotalBytes,
-                  QString FileSystemType,
-                  QString Device);
+    explicit Disk(QString name,
+                  QString rootPath,
+                  quint64 availableBytes,
+                  quint64 totalBytes,
+                  QString fileSystemType,
+                  QString device);
 
     /**
      * @brief getName
@@ -85,12 +85,12 @@ public:
      * Setter functions
      */
     /**-------------------------------------------------------------**/
-    void setName(QString Name);
-    void setRootPath(QString RootPath);
-    void setAvailableBytes(quint64 AvailableBytes);
-    void setTotalBytes(quint64 TotalBytes);
-    void setFileSystemType(QString FileSystemType);
-    void setDevice(QString Device);
+    void setName(QString name);
+    void setRootPath(QString rootPath);
+    void setAvailableBytes(quint64 availableBytes);
+    void setTotalBytes(quint64 totalBytes);
+    void setFileSystemType(QString fileSystemType);
+    void setDevice(QString device);
     /**-------------------------------------------------------------**/
 
 };

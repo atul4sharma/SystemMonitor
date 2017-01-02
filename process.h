@@ -25,17 +25,17 @@ public:
 
     /**
      * @brief Process      Parameterized constructor
-     * @param ProcessId    PID of process
-     * @param ProcessName  Name of process
-     * @param CpuUsage     CPU usage by process
-     * @param MemoryUsage  Memory usage by process
-     * @param User         User that has invoked the process
+     * @param processId    PID of process
+     * @param processName  Name of process
+     * @param cpuUsage     CPU usage by process
+     * @param memoryUsage  Memory usage by process
+     * @param user         User that has invoked the process
      */
-    explicit Process(quint64 ProcessId,
-                     QString ProcessName,
-                     float CpuUsage,
-                     double MemoryUsage,
-                     QString User);
+    explicit Process(quint64 processId,
+                     QString processName,
+                     float cpuUsage,
+                     double memoryUsage,
+                     QString user);
     /**
      * @brief showInfo
      * Shows the details of process

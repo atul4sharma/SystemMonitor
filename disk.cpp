@@ -11,26 +11,26 @@ Disk::Disk() {}
 
 /**
  * @brief Disk::Disk     Parametrized constructor
- * @param Name           - Stores display name of disk
- * @param RootPath       - Stores root path of disk
- * @param AvailableBytes - Stores available bytes of disk for user
- * @param TotalBytes     - Stores total bytes of disk
- * @param FileSystemType - Stores file system type
- * @param Device         - Stores device name
+ * @param name           - Stores display name of disk
+ * @param rootPath       - Stores root path of disk
+ * @param availableBytes - Stores available bytes of disk for user
+ * @param totalBytes     - Stores total bytes of disk
+ * @param fileSystemType - Stores file system type
+ * @param device         - Stores device name
  */
-Disk::Disk(QString Name,
-           QString RootPath,
-           quint64 AvailableBytes,
-           quint64 TotalBytes,
-           QString FileSystemType,
-           QString Device)
+Disk::Disk(QString name,
+           QString rootPath,
+           quint64 availableBytes,
+           quint64 totalBytes,
+           QString fileSystemType,
+           QString device)
 {
-    mName            = Name;
-    mRootPath        = RootPath;
-    mAvailableBytes  = AvailableBytes;
-    mTotalBytes      = TotalBytes;
-    mFileSystemType  = FileSystemType;
-    mDevice          = Device;
+    mName            = name;
+    mRootPath        = rootPath;
+    mAvailableBytes  = availableBytes;
+    mTotalBytes      = totalBytes;
+    mFileSystemType  = fileSystemType;
+    mDevice          = device;
 
 }
 
@@ -99,27 +99,27 @@ void Disk::showInfo() const{
 }
 
 /**----------------------------Setter functions----------------------------**/
-void Disk::setName(QString Name){
-    mName = Name;
+void Disk::setName(QString name){
+    mName = name;
 }
 
-void Disk::setRootPath(QString RootPath){
-    mRootPath = RootPath;
+void Disk::setRootPath(QString rootPath){
+    mRootPath = rootPath;
 }
 
-void Disk::setAvailableBytes(quint64 AvailableBytes){
-    mAvailableBytes = AvailableBytes;
+void Disk::setAvailableBytes(quint64 availableBytes){
+    mAvailableBytes = availableBytes;
 }
 
-void Disk::setTotalBytes(quint64 TotalBytes){
-    mTotalBytes = TotalBytes;
+void Disk::setTotalBytes(quint64 totalBytes){
+    mTotalBytes = totalBytes;
 }
 
-void Disk::setFileSystemType(QString FileSystemType){
-    mFileSystemType = FileSystemType;
+void Disk::setFileSystemType(QString fileSystemType){
+    mFileSystemType = fileSystemType;
 }
 
-void Disk::setDevice(QString Device){
-    mDevice = Device;
+void Disk::setDevice(QString device){
+    mDevice = device;
 }
 /**-----------------------------------------------------------------------**/

@@ -8,25 +8,25 @@ Process::Process() {}
 
 /**
  * @brief Process::Process
- * @param ProcessId        PID of process
- * @param ProcessName      Name of process
- * @param CpuUsage         CPU usage by process
- * @param MemoryUsage      Memory usage by process
- * @param User             User that has invoked the process
+ * @param processId        PID of process
+ * @param processName      Name of process
+ * @param cpuUsage         CPU usage by process
+ * @param memoryUsage      Memory usage by process
+ * @param user             User that has invoked the process
  */
-Process::Process(quint64 ProcessId,
-                 QString ProcessName,
-                 float CpuUsage,
-                 double MemoryUsage,
-                 QString User)
+Process::Process(quint64 processId,
+                 QString processName,
+                 float cpuUsage,
+                 double memoryUsage,
+                 QString user)
 
 {
 
-    mProcessId   = ProcessId;
-    mProcessName = ProcessName;
-    mCpuUsage    = CpuUsage;
-    mMemoryUsage = MemoryUsage;
-    mUser        = User;
+    mProcessId   = processId;
+    mProcessName = processName;
+    mCpuUsage    = cpuUsage;
+    mMemoryUsage = memoryUsage;
+    mUser        = user;
 
 }
 

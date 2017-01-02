@@ -4,24 +4,24 @@
 
 NetworkSocket::NetworkSocket() {}
 
-NetworkSocket::NetworkSocket(QString ProtocolType,
-                             quint64 ReceiveQ,
-                             quint64 SendQ,
-                             QString LocalAddress,
-                             QString ForeignAddress,
-                             QString State,
-                             quint64 PID,
-                             QString ProgramName)
+NetworkSocket::NetworkSocket(QString protocolType,
+                             quint64 receiveQ,
+                             quint64 sendQ,
+                             QString localAddress,
+                             QString foreignAddress,
+                             QString state,
+                             quint64 pID,
+                             QString programName)
 {
 
-    mProtocolType    =  ProtocolType;
-    mReceiveQ        =  ReceiveQ;
-    mSendQ           =  SendQ;
-    mLocalAddress    =  LocalAddress;
-    mForeignAddress  =  ForeignAddress;
-    mState           =  State;
-    mPID             =  PID;
-    mProgramName     =  ProgramName;
+    mProtocolType    =  protocolType;
+    mReceiveQ        =  receiveQ;
+    mSendQ           =  sendQ;
+    mLocalAddress    =  localAddress;
+    mForeignAddress  =  foreignAddress;
+    mState           =  state;
+    mPID             =  pID;
+    mProgramName     =  programName;
 }
 
 void NetworkSocket::showInfo() const {
@@ -74,36 +74,36 @@ QString  NetworkSocket::getProgramName() const{
 
 /**--------------------------------- Setter Functions -----------------------------**/
 
-void NetworkSocket::setProtocolType(QString Protocol) {
-    mProtocolType = Protocol;
+void NetworkSocket::setProtocolType(QString protocol) {
+    mProtocolType = protocol;
 }
 
-void NetworkSocket::setReceiveQ(quint64 ReceiveQ) {
-    mReceiveQ = ReceiveQ;
+void NetworkSocket::setReceiveQ(quint64 receiveQ) {
+    mReceiveQ = receiveQ;
 }
 
-void NetworkSocket::setSendQ(quint64 SendQ) {
-    mSendQ = SendQ;
+void NetworkSocket::setSendQ(quint64 sendQ) {
+    mSendQ = sendQ;
 }
 
-void NetworkSocket::setLocalAddress(QString LocalAddress) {
-    mLocalAddress = LocalAddress;
+void NetworkSocket::setLocalAddress(QString localAddress) {
+    mLocalAddress = localAddress;
 }
 
-void NetworkSocket::setForeignAddress(QString ForeignAddress) {
-    mForeignAddress = ForeignAddress;
+void NetworkSocket::setForeignAddress(QString foreignAddress) {
+    mForeignAddress = foreignAddress;
 }
 
-void NetworkSocket::setState(QString State) {
-    mState = State;
+void NetworkSocket::setState(QString state) {
+    mState = state;
 }
 
-void NetworkSocket::setPID(quint64 PID) {
-    mPID = PID;
+void NetworkSocket::setPID(quint64 pID) {
+    mPID = pID;
 }
 
-void NetworkSocket::setProgramName(QString ProgramName) {
-    mProgramName = ProgramName;
+void NetworkSocket::setProgramName(QString programName) {
+    mProgramName = programName;
 }
 
 /**--------------------------------------------------------------------------------------**/

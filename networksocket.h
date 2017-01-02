@@ -29,23 +29,23 @@ public:
 
     /**
      * @brief NetworkSocket
-     * @param ProtocolType   - stores the type of protocol
-     * @param ReceiveQ       - stores the bytes in Recive-Q
-     * @param SendQ          - stores the bytes in Send-Q
-     * @param LocalAddress   - stores the local address for the socket
-     * @param ForeignAddress - stores the foreign address for the socket
-     * @param State          - stores the state of socket
-     * @param PID            - stores the PID of the process using the socket
-     * @param ProgramName    - stores the name of the program using the socket
+     * @param protocolType   - stores the type of protocol
+     * @param receiveQ       - stores the bytes in Recive-Q
+     * @param sendQ          - stores the bytes in Send-Q
+     * @param localAddress   - stores the local address for the socket
+     * @param foreignAddress - stores the foreign address for the socket
+     * @param state          - stores the state of socket
+     * @param pID            - stores the PID of the process using the socket
+     * @param programName    - stores the name of the program using the socket
      */
-    explicit NetworkSocket(QString  ProtocolType,
-                           quint64  ReceiveQ,
-                           quint64  SendQ,
-                           QString  LocalAddress,
-                           QString  ForeignAddress,
-                           QString  State,
-                           quint64  PID,
-                           QString  ProgramName);
+    explicit NetworkSocket(QString  protocolType,
+                           quint64  receiveQ,
+                           quint64  sendQ,
+                           QString  localAddress,
+                           QString  foreignAddress,
+                           QString  state,
+                           quint64  pID,
+                           QString  programName);
 
     QString  getProtocolType() const;
     quint64  getReceiveQ() const;
@@ -56,14 +56,14 @@ public:
     quint64  getPID() const;
     QString  getProgramName() const;
 
-    void setProtocolType(QString Protocol);
-    void setReceiveQ(quint64 ReceiveQ);
-    void setSendQ(quint64 SendQ);
-    void setLocalAddress(QString LocalAddress);
-    void setForeignAddress(QString ForeignAddress);
-    void setState(QString State);
-    void setPID(quint64 PID);
-    void setProgramName(QString ProgramName);
+    void setProtocolType(QString protocol);
+    void setReceiveQ(quint64 receiveQ);
+    void setSendQ(quint64 sendQ);
+    void setLocalAddress(QString localAddress);
+    void setForeignAddress(QString foreignAddress);
+    void setState(QString state);
+    void setPID(quint64 pID);
+    void setProgramName(QString programName);
 
     void showInfo() const;
 
