@@ -53,10 +53,12 @@ int SystemUtil::getProcessesList(QList<Process> *processList){
     qDebug() <<"Getting Process List . . . . . . . . . ";
 
     mProcess = "top";
+
     //---------------------------------------------------------//
     // -b        for batch output
     // -n        for number of iterations
     //---------------------------------------------------------//
+    mArguments.clear();
     mArguments << "-b" << "-n" << "1" ;
 
     mTopProcess -> start( mProcess , mArguments );
@@ -69,12 +71,6 @@ int SystemUtil::getProcessesList(QList<Process> *processList){
     }
 
     mTopProcess->waitForFinished() ;
-
-    mOutputString.clear();
-    mOutputString = QString( mTopProcess -> readAll() );
-
-    mOutputList.clear();
-    mOutputList = mOutputString.split('\n' , QString::SkipEmptyParts );
 
     return parseProcesses(processList);
 
@@ -89,6 +85,12 @@ int SystemUtil::getProcessesList(QList<Process> *processList){
  * appends the process to processList
  */
 int SystemUtil::parseProcesses(QList<Process> *processList){
+
+    mOutputString.clear();
+    mOutputString = QString( mTopProcess -> readAll() );
+
+    mOutputList.clear();
+    mOutputList = mOutputString.split('\n' , QString::SkipEmptyParts );
 
     Process p;
     //---------------------------------------------------------//
@@ -169,6 +171,7 @@ int SystemUtil::getSocketList(QList<NetworkSocket> *socketList){
 
     mProcess = "netstat";
 
+    mArguments.clear();
     mArguments << "-a" << "-p" << "--inet";
 
     mNetstatProcess->start(mProcess, mArguments);
@@ -181,13 +184,6 @@ int SystemUtil::getSocketList(QList<NetworkSocket> *socketList){
     }
 
     mNetstatProcess->waitForFinished();
-
-    mOutputString.clear();
-    mOutputString = QString( mNetstatProcess -> readAll() );
-
-    mOutputList.clear();
-    mOutputList = mOutputString.split('\n' , QString::SkipEmptyParts );
-
 
     return parseSockets(socketList);
 }
@@ -202,6 +198,12 @@ int SystemUtil::getSocketList(QList<NetworkSocket> *socketList){
  * appends the process to socketList
  */
 int SystemUtil::parseSockets(QList<NetworkSocket> *socketList){
+
+    mOutputString.clear();
+    mOutputString = QString( mNetstatProcess -> readAll() );
+
+    mOutputList.clear();
+    mOutputList = mOutputString.split('\n' , QString::SkipEmptyParts );
 
     NetworkSocket s;
 
