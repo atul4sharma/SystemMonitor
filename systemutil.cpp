@@ -286,9 +286,48 @@ void SystemUtil::showBatteryDetails() {
 
     QString str(batteryDetail.readAll());
     QStringList strList = str.split('\n',QString::SkipEmptyParts);
+    BatteryInfo b;
 
-    for( int i = 0 ; i < strList.size() ; i++ )
-        qDebug() << strList.at( i );
+    for( int i = 0 ; i < strList.size() ; i++ ){
+        QString str = strList.at( i );
+        QStringList splittedString = str.split('=');
+
+        switch (i) {
+        case 0: b.setName(splittedString.at(1));
+            break;
+        case 1: b.setStatus(splittedString.at(1));
+            break;
+        case 2: b.setSupplyPresent(splittedString.at(1).toLong());
+            break;
+        case 3: b.setSupplyTechnology(splittedString.at(1));
+            break;
+        case 4: b.setSupplyCycleCount(splittedString.at(1).toLong());
+            break;
+        case 5: b.setSupplyVoltageMinDesign(splittedString.at(1).toLong());
+            break;
+        case 6: b.setSupplyVoltageNow(splittedString.at(1).toLong());
+            break;
+        case 7: b.setSupplyCurrentNow(splittedString.at(1).toLong());
+            break;
+        case 8: b.setSupplyChargeFullDesign(splittedString.at(1).toLong());
+            break;
+        case 9: b.setSupplyChargeFull(splittedString.at(1).toLong());
+            break;
+        case 10: b.setSupplyChargeNow(splittedString.at(1).toLong());
+            break;
+        case 11: b.setSupplyCapacity(splittedString.at(1).toLong());
+            break;
+        case 12: b.setSupplyCapacityLevel(splittedString.at(1));
+            break;
+        case 13: b.setSupplyModelName(splittedString.at(1));
+            break;
+        case 14: b.setSupplyManufacturer(splittedString.at(1));
+        default:
+            break;
+        }
+    }
+
+    b.showInfo();
 
 
 }

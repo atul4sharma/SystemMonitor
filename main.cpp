@@ -43,5 +43,5 @@ int main(int argc, char *argv[]){
 //    //LOG_SOCKET ( socketList);
 
     subProcess->showBatteryDetails();
-    return a.exec();
+    a.exit(0);
 }

@@ -5,6 +5,7 @@
 #include "disk.h"
 #include "networksocket.h"
 #include "defs.h"
+#include "batteryinfo.h"
 
 #include <QObject>
 #include <QProcess>

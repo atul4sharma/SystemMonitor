@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     systemutil.cpp \
     disk.cpp \
     logger.cpp \
-    networksocket.cpp
+    networksocket.cpp \
+    batteryinfo.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -33,4 +34,5 @@ HEADERS += \
     disk.h \
     defs.h \
     logger.h \
-    networksocket.h
+    networksocket.h \
+    batteryinfo.h

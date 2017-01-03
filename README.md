@@ -1,5 +1,7 @@
 # SystemMonitor
 
 Backend for getting system information 
- * status of running processes
- * disk information
+ * Status of running processes
+ * Disk information
+ * Network Socket information
+ * Battery information
